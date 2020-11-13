@@ -48,7 +48,7 @@ const controller = {
 			discount: req.body.discount,
 			category:req.body.category,
 			description:req.body.description,
-			image:req.body.image,
+			
 			id: content[content.length-1].id+1
 
 		})
@@ -95,7 +95,7 @@ let productToEdit = products.find(function(product){
 		data = JSON.stringify(data)
 
 		fs.writeFileSync(filePath, data)
-		res.send('producto editado')
+		res.redirect('products')
 
 		
 		
