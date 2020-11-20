@@ -14,11 +14,13 @@ const controller = {
 	},
 
 	search: (req, res) => {
+
 		
+
 		if(req.query.search){
 			 resultado = products.filter(function(product){
 
-					return product.name.includes(req.query.search)
+					return product.name.includes(req.query.search) || product.description.includes(req.query.search)
 
 				})
 			}

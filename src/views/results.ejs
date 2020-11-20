@@ -17,9 +17,9 @@
 			<div class="col-12">
 				<h2 class="products-title">Resultados de la búsqueda: </h2>
 			</div>
-			<% if(resultado!=null){ %> 
+			<% if(resultado!= 0){ %> 
+			<% resultado.forEach(function(product){ %> 
 				<div class="col-12 col-sm-6 col-lg-3">
-					<% resultado.forEach(function(product){ %> 
 					<section class="product-box">
 						<a href="/products/detail/<%=product.id%>">
 							<figure class="product-box_image">
@@ -35,10 +35,10 @@
 					</section>
 				
 				</div>
-				<% })}else{  %> 
+			<% })}else{ %> 
 			
 			<div class="col-12">
-				<h2 class="products-title" style="color: tomato;">No hay productos que coincidan con esa búsqueda</h2>
+				<p class="products-title" style="color: tomato;">No hay productos que coincidan con esa búsqueda</p>
 			</div>
 		<% } %> 
 		</div>

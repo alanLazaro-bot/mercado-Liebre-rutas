@@ -95,7 +95,7 @@ let productToEdit = products.find(function(product){
 		data = JSON.stringify(data)
 
 		fs.writeFileSync(filePath, data)
-		res.redirect('products')
+		res.redirect('/')
 
 		
 		
