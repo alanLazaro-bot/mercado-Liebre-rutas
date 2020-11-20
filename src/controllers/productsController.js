@@ -33,7 +33,11 @@ const controller = {
 	},
 	
 	// Create -  Method to store
-	store: (req, res) => {
+	store: (req, res, next) => {
+
+		console.log(req)
+
+
 		let filePath= path.resolve('src','data','productsDataBase.json')
 		let content = fs.readFileSync(filePath,{encoding:'utf-8'})
 		
@@ -42,14 +46,14 @@ const controller = {
 
 
 		content.push({
-
+			id: content[content.length-1].id+1,
 			name: req.body.name,
 			price: req.body.price,
 			discount: req.body.discount,
 			category:req.body.category,
 			description:req.body.description,
+			image:req.files[0].filename,		
 			
-			id: content[content.length-1].id+1
 
 		})
 
