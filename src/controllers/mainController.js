@@ -10,7 +10,19 @@ const controller = {
 	
 	
 	index: (req, res) => {
-		res.render('index', {products});
+
+		productsVisited = products.filter(function(product){
+			return product.category == 'visited'
+			
+		})
+		productsSale = products.filter(function(product){
+			return product.category == 'in-sale'
+			
+		})
+
+
+
+		res.render('index', {productsVisited:productsVisited,productsSale:productsSale});
 	},
 
 	search: (req, res) => {

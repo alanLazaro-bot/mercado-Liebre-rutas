@@ -3,7 +3,7 @@ const path = require('path');
 const { send } = require('process');
 
 const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -36,16 +36,9 @@ const controller = {
 	store: (req, res, next) => {
 
 		console.log(req)
-
-
-		let filePath= path.resolve('src','data','productsDataBase.json')
-		let content = fs.readFileSync(filePath,{encoding:'utf-8'})
 		
 
-		content= JSON.parse(content)
-
-
-		content.push({
+		products.push({
 			id: content[content.length-1].id+1,
 			name: req.body.name,
 			price: req.body.price,
@@ -57,9 +50,9 @@ const controller = {
 
 		})
 
-		content = JSON.stringify(content)
+		products = JSON.stringify(products)
 
-		fs.writeFileSync(filePath, content)
+		fs.writeFileSync(productsFilePath, products)
 
 		res.send('recibido')
 
@@ -78,17 +71,10 @@ let productToEdit = products.find(function(product){
 	// Update - Method to update
 	update: (req, res) => {
 		
-		let filePath= path.resolve('src','data','productsDataBase.json')
-		let data = fs.readFileSync(filePath,{encoding:'utf-8'})
-		
-
-		data = JSON.parse(data)
-
-		data.forEach(function(product){
+		products.forEach(function(product){
 			
 			if(product.id==req.params.id){
 
-			
 			product.name = req.body.name;
 			product.price = req.body.price;
 			product.discount = req.body.discount;
@@ -96,9 +82,9 @@ let productToEdit = products.find(function(product){
 			product.description = req.body.description;
 			}	
 			});
-		data = JSON.stringify(data)
+		products = JSON.stringify(products)
 
-		fs.writeFileSync(filePath, data)
+		fs.writeFileSync(productsFilePath, products)
 		res.redirect('/')
 
 		
